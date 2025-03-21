@@ -2,12 +2,14 @@ package MediaPlayer;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import org.w3c.dom.Node;
+
 
 /**
  * Controller class that manages the playlist using a LinkedList data structure.
  * Handles operations like adding, removing, reordering, and sorting songs.
  */
-public class PlaylistController {
+public class PlaylistController{
 
     // Data structure - Customized LinkedList to store playlist songs
     private BetterLinkedList<Song> playlist;
@@ -37,7 +39,7 @@ public class PlaylistController {
      * @param song The song to add to the playlist
      */
     public void addSong(Song song) {
-			// todo: Implement this method
+      playlist.addLast(song);
     }
 
     /**
@@ -47,8 +49,15 @@ public class PlaylistController {
      * @return true if removal was successful, false otherwise
      */
     public boolean removeSong(int index) {
-			// todo: Implement this method
-			return false; // placeholder
+			 
+			if(index < 0 || index > playlist.size() - 1) {
+        return false; 
+      }
+
+      playlist.remove(index);
+
+      return true; 
+
     }
 
     /**
@@ -58,8 +67,14 @@ public class PlaylistController {
      * @return The new index of the song, or -1 if move failed
      */
     public int moveSongUp(int index) {
-			// todo: Implement this method using 'swap' method
-			return 1; // placeholder
+
+      if(index < 0 || index >= playlist.size() - 1){
+        return -1; 
+      }
+
+			playlist.swapWithNext(index); 
+
+      return index + 1; 
     }
 
     /**
@@ -69,8 +84,14 @@ public class PlaylistController {
      * @return The new index of the song, or -1 if move failed
      */
     public int moveSongDown(int index) {
-			// todo: Implement this method using 'swap' method
-			return 1; // placeholder
+			
+      if(index < 0 || index >= playlist.size() - 1){
+        return -1; 
+      }
+
+			playlist.swapWithNext(index - 1); 
+
+      return index; 
     }
 
     /**
@@ -87,8 +108,8 @@ public class PlaylistController {
      * @return The number of songs in the playlist
      */
     public int getSize() {
-        // todo: Implement this method
-				return 1;
+        
+      return playlist.size(); 
     }
 
     /**
@@ -98,8 +119,9 @@ public class PlaylistController {
      * @return The song at the specified index, or null if index is invalid
      */
     public Song getSongAt(int index) {
-				// todo: Implement this method
-        return null;
+				
+      return (Song) playlist.get(index); 
+
     }
 
     /**
@@ -115,7 +137,7 @@ public class PlaylistController {
      * Clears all songs from the playlist.
      */
     public void clearPlaylist() {
-				// todo: Implement this method
+				playlist.clear(); 
     }
 
     /**

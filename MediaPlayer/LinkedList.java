@@ -40,7 +40,7 @@ public class LinkedList<E> {
     // Instance variables for the LinkedList
     private Node<E> head;  // Reference to the first node in the list
     private Node<E> last; 
-    private int size;   // Number of elements in the list
+    protected int size;   // Number of elements in the list
     
     /**
      * Default constructor for the LinkedList class

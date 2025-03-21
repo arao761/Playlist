@@ -15,7 +15,16 @@ public class BetterLinkedList<E> extends LinkedList<E> {
   * @throws IndexOutOfBoundsException if either index is out of range (i < 0 || i >= size || j < 0 || j >= size)
   */
  public void swap(int i, int j) {
-	//todo: implement this method
+
+    if(i < 0 || i >= size || j < 0 || j >= size){
+        throw new IndexOutOfBoundsException("index out of bounds");
+    }
+
+	
+    E removed = remove(j);
+
+     add(i, removed);
+
  }
 
  /**
@@ -25,7 +34,14 @@ public class BetterLinkedList<E> extends LinkedList<E> {
   * @throws IndexOutOfBoundsException if the index is out of range (i < 0 || i >= size - 1)
   */
  public void swapWithNext(int i) {
-	//todo: implement this method
+	if(i < 0 || i >= size - 1){
+        throw new IndexOutOfBoundsException("index out of bounds"); 
+    }
+
+    E removed = remove(i+1);
+
+     add(i, removed);
+     
  }
 
  /**

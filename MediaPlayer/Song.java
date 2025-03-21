@@ -78,4 +78,6 @@ public class Song {
         return title + " - " + artist + " (" + duration + ")";
     }
 
+    public void compareTo()
+
 }
