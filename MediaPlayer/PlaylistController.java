@@ -40,6 +40,7 @@ public class PlaylistController{
      */
     public void addSong(Song song) {
       playlist.addLast(song);
+      updatePlaylistTable();
     }
 
     /**
@@ -55,6 +56,7 @@ public class PlaylistController{
       }
 
       playlist.remove(index);
+      updatePlaylistTable();
 
       return true; 
 
@@ -68,13 +70,14 @@ public class PlaylistController{
      */
     public int moveSongUp(int index) {
 
-      if(index < 0 || index >= playlist.size() - 1){
+      if(index < 0 || index >= playlist.size()){
         return -1; 
       }
 
-			playlist.swapWithNext(index); 
+			playlist.swapWithNext(index - 1); 
+      updatePlaylistTable();
 
-      return index + 1; 
+      return index - 1; 
     }
 
     /**
@@ -89,9 +92,10 @@ public class PlaylistController{
         return -1; 
       }
 
-			playlist.swapWithNext(index - 1); 
+			playlist.swapWithNext(index); 
+      updatePlaylistTable();
 
-      return index; 
+      return index + 1;
     }
 
     /**
@@ -145,6 +149,7 @@ public class PlaylistController{
      * This must be called after any modification to the playlist.
      */
     private void updatePlaylistTable() {
+
         playlistModel.setRowCount(0);
         int position = 1;
 				for (int i = 0; i < playlist.size(); i++) {

@@ -77,7 +77,5 @@ public class Song {
     public String toString() {
         return title + " - " + artist + " (" + duration + ")";
     }
-
-    public void compareTo()
-
+    
 }

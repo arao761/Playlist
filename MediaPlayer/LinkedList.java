@@ -14,9 +14,9 @@ public class LinkedList<E> {
      * Node class for the LinkedList
      * Contains data and a reference to the next node
      */
-    private class Node<E> {
-        private E data;         // Data stored in this node
-        private Node<E> next;      // Reference to the next node in the list
+    protected class Node<E> {
+        protected E data;         // Data stored in this node
+        protected Node<E> next;      // Reference to the next node in the list
         
         /**
          * Constructor for the Node class
@@ -38,8 +38,8 @@ public class LinkedList<E> {
     }
     
     // Instance variables for the LinkedList
-    private Node<E> head;  // Reference to the first node in the list
-    private Node<E> last; 
+    protected Node<E> head;  // Reference to the first node in the list
+    protected Node<E> last; 
     protected int size;   // Number of elements in the list
     
     /**

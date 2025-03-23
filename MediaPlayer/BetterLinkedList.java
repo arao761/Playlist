@@ -14,18 +14,40 @@ public class BetterLinkedList<E> extends LinkedList<E> {
   * @param j the index of the second element to be swapped
   * @throws IndexOutOfBoundsException if either index is out of range (i < 0 || i >= size || j < 0 || j >= size)
   */
- public void swap(int i, int j) {
 
-    if(i < 0 || i >= size || j < 0 || j >= size){
-        throw new IndexOutOfBoundsException("index out of bounds");
+
+  //helper method to getnode at a specific index 
+  public Node<E> getNode(int index) {
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index out of bounds");
     }
 
-	
-    E removed = remove(j);
+    Node<E> current = head; // Start at the head
+    for (int i = 0; i < index; i++) {
+        current = current.next; // Move to the next node
+    }
+    return current; // Return the node at the desired index
+}
 
-     add(i, removed);
 
- }
+public void swap(int i, int j) {
+    if (i < 0 || i >= size || j < 0 || j >= size) {
+        throw new IndexOutOfBoundsException("Index out of bounds");
+    }
+
+    if (i == j) {
+        return; // No swap needed if indices are the same
+    }
+
+    // Get the nodes at positions i and j
+    Node<E> node1 = getNode(i);
+    Node<E> node2 = getNode(j);
+
+    // Swap the data (not the nodes themselves)
+    E temp = node1.data;
+    node1.data = node2.data;
+    node2.data = temp;
+}
 
  /**
   * Swaps the element at the specified position with the next element in this list.
@@ -33,16 +55,20 @@ public class BetterLinkedList<E> extends LinkedList<E> {
   * @param i the index of the element to be swapped with its next element
   * @throws IndexOutOfBoundsException if the index is out of range (i < 0 || i >= size - 1)
   */
- public void swapWithNext(int i) {
-	if(i < 0 || i >= size - 1){
-        throw new IndexOutOfBoundsException("index out of bounds"); 
+  public void swapWithNext(int i) {
+    if (i < 0 || i >= size - 1) {
+        throw new IndexOutOfBoundsException("Index out of bounds");
     }
 
-    E removed = remove(i+1);
+    // Get the current node and its next node
+    Node<E> currentNode = getNode(i);
+    Node<E> nextNode = currentNode.next;
 
-     add(i, removed);
-     
- }
+    // Swap their data
+    E temp = currentNode.data;
+    currentNode.data = nextNode.data;
+    nextNode.data = temp;
+}
 
  /**
   * Sorts the elements in this list in ascending order.
