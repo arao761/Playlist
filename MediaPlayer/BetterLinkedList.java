@@ -77,20 +77,22 @@ public void swap(int i, int j) {
   */
  public void sort() {
 
-    Node<E> current = head; 
-
-    for(int i = 0; i < size; i++){
-        
-        while(current!=null){
-
-            if(current.data.compareTo(current.next.data) == 1){
-                swapWithNext(i);
-            }
-    
-            current = current.next;
-        }
+    if (size <= 1) {
+        return;
     }
 
- }
+    Node<E> current = head;
+
+    for (int i = 0; i < size - 1; i++) {
+        if (current.data.compareTo(current.next.data) > 0) {
+            swapWithNext(i);
+        }
+        
+        current = current.next;
+       
+    }
+
+    } 
 
 }
+

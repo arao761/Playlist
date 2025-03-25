@@ -103,7 +103,10 @@ public class PlaylistController{
      * Sorts the playlist alphabetically by song title.
      */
     public void sortByTitle() {
-			// todo: Implement this method AFTER implementing sort in the BetterLinkedList class
+
+      playlist.sort(); 
+      updatePlaylistTable();  
+
     }
 
 
