@@ -78,6 +78,7 @@ public class PlaylistController{
       updatePlaylistTable();
 
       return index - 1; 
+
     }
 
     /**

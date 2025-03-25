@@ -6,7 +6,7 @@ package MediaPlayer;
  * Adds the ability to swap elements and sort them.
  */
 
-public class BetterLinkedList<E> extends LinkedList<E> {
+public class BetterLinkedList<E extends Comparable<E>> extends LinkedList<E> {
  /**
   * Swaps the elements at the specified positions in this list.
   *
@@ -18,6 +18,7 @@ public class BetterLinkedList<E> extends LinkedList<E> {
 
   //helper method to getnode at a specific index 
   public Node<E> getNode(int index) {
+    
     if (index < 0 || index >= size) {
         throw new IndexOutOfBoundsException("Index out of bounds");
     }
@@ -31,19 +32,18 @@ public class BetterLinkedList<E> extends LinkedList<E> {
 
 
 public void swap(int i, int j) {
+   
     if (i < 0 || i >= size || j < 0 || j >= size) {
         throw new IndexOutOfBoundsException("Index out of bounds");
     }
 
     if (i == j) {
-        return; // No swap needed if indices are the same
+        return; 
     }
 
-    // Get the nodes at positions i and j
     Node<E> node1 = getNode(i);
     Node<E> node2 = getNode(j);
 
-    // Swap the data (not the nodes themselves)
     E temp = node1.data;
     node1.data = node2.data;
     node2.data = temp;
@@ -60,11 +60,9 @@ public void swap(int i, int j) {
         throw new IndexOutOfBoundsException("Index out of bounds");
     }
 
-    // Get the current node and its next node
     Node<E> currentNode = getNode(i);
     Node<E> nextNode = currentNode.next;
 
-    // Swap their data
     E temp = currentNode.data;
     currentNode.data = nextNode.data;
     nextNode.data = temp;
@@ -78,6 +76,21 @@ public void swap(int i, int j) {
   * @throws ClassCastException if the list contains elements that do not implement Comparable
   */
  public void sort() {
-	//todo: implement this method
+
+    Node<E> current = head; 
+
+    for(int i = 0; i < size; i++){
+        
+        while(current!=null){
+
+            if(current.data.compareTo(current.next.data) == 1){
+                swapWithNext(i);
+            }
+    
+            current = current.next;
+        }
+    }
+
  }
+
 }
