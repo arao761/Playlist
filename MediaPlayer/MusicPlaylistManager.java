@@ -32,6 +32,7 @@ public class MusicPlaylistManager extends JFrame {
     private JButton moveUpButton;
     private JButton moveDownButton;
     private JButton sortButton;
+    private JButton addRandomSongsButton;
 
     // Playback control components
     private JPanel playbackPanel;
@@ -52,7 +53,7 @@ public class MusicPlaylistManager extends JFrame {
     public MusicPlaylistManager() {
         // Setup the JFrame
         setTitle("Music Playlist Manager");
-        setSize(1000, 600);
+        setSize(1250, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -136,12 +137,15 @@ public class MusicPlaylistManager extends JFrame {
         moveUpButton = new JButton("Move Up");
         moveDownButton = new JButton("Move Down");
         sortButton = new JButton("Sort");
+        addRandomSongsButton = new JButton("Add 5 Random Songs");
 
         playlistControlPanel.add(addSongButton);
         playlistControlPanel.add(removeSongButton);
         playlistControlPanel.add(moveUpButton);
         playlistControlPanel.add(moveDownButton);
         playlistControlPanel.add(sortButton);
+        playlistControlPanel.add(addRandomSongsButton);
+
 
         playlistPanel.add(playlistControlPanel, BorderLayout.NORTH);
         playlistPanel.add(playlistScrollPane, BorderLayout.CENTER);
@@ -249,6 +253,8 @@ public class MusicPlaylistManager extends JFrame {
             }
         });
 
+
+
         // Move up button functionality
         moveUpButton.addActionListener(e -> {
             int selectedRow = playlistTable.getSelectedRow();
@@ -275,6 +281,20 @@ public class MusicPlaylistManager extends JFrame {
 
         // Sort button functionality - by default sort by title
         sortButton.addActionListener(e -> { playlistController.sortByTitle();});
+
+          //add random 5 song functionality
+          addRandomSongsButton.addActionListener(e -> {
+            List<Song> randomSongs = songDbController.getRandomSongs(5);
+            if (randomSongs != null && !randomSongs.isEmpty()) {
+                for (Song song : randomSongs) {
+                    playlistController.addSong(song);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "No songs available to add.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         // Add right-click menu for sort options
         JPopupMenu sortMenu = new JPopupMenu();

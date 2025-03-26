@@ -1,4 +1,8 @@
 package MediaPlayer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -147,6 +151,25 @@ public class PlaylistController{
     public void clearPlaylist() {
 				playlist.clear(); 
     }
+
+    public List<Song> getRandomSongs(int count) {
+      List<Song> allSongs = new ArrayList<>();
+      
+      for (int i = 0; i < count; i++) {
+          allSongs.add(playlist.get(i));
+      }
+  
+      if (allSongs.size() <= count) {
+          return new ArrayList<>(allSongs);
+      }
+
+      Collections.shuffle(allSongs);
+
+      updatePlaylistTable();
+  
+      return allSongs.subList(0, count);
+  }
+
 
     /**
      * Updates the playlist table to reflect the current playlist.

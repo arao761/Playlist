@@ -204,4 +204,9 @@ public class SongDatabaseController {
             }
         }
     }
+
+    public List<Song> getRandomSongs(int i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRandomSongs'");
+    }
 }
