@@ -153,21 +153,14 @@ public class PlaylistController{
     }
 
     public List<Song> getRandomSongs(int count) {
-      List<Song> allSongs = new ArrayList<>();
-      
-      for (int i = 0; i < count; i++) {
-          allSongs.add(playlist.get(i));
-      }
-  
-      if (allSongs.size() <= count) {
-          return new ArrayList<>(allSongs);
-      }
+
+      List<Song> allSongs = (List<Song>) getAllSongs();
 
       Collections.shuffle(allSongs);
-
+  
       updatePlaylistTable();
   
-      return allSongs.subList(0, count);
+      return allSongs.subList(0, Math.min(count, allSongs.size()));
   }
 
 
